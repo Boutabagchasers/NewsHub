@@ -1,0 +1,496 @@
+{
+  "regions": [
+    {
+      "name": "Asia",
+      "countries": [
+        {
+          "name": "India",
+          "code": "IN",
+          "flag": "🇮🇳",
+          "outlets": [
+            {
+              "name": "Hindustan Times",
+              "language": "English",
+              "url": "https://www.hindustantimes.com/",
+              "description": "Leading English-language newspaper covering Indian and international news",
+              "category": "news"
+            },
+            {
+              "name": "Times of India",
+              "language": "English",
+              "url": "https://timesofindia.indiatimes.com/",
+              "description": "India's largest English newspaper with comprehensive coverage",
+              "category": "news"
+            },
+            {
+              "name": "NDTV",
+              "language": "English",
+              "url": "https://www.ndtv.com/",
+              "description": "Indian news broadcaster covering politics, business, and entertainment",
+              "category": "news"
+            }
+          ]
+        },
+        {
+          "name": "China",
+          "code": "CN",
+          "flag": "🇨🇳",
+          "outlets": [
+            {
+              "name": "Global Times",
+              "language": "English",
+              "url": "https://www.globaltimes.cn/",
+              "description": "Chinese daily newspaper with international perspective",
+              "category": "news"
+            },
+            {
+              "name": "CGTN",
+              "language": "English",
+              "url": "https://www.cgtn.com/",
+              "description": "China Global Television Network - international news broadcaster",
+              "category": "news"
+            },
+            {
+              "name": "China Daily",
+              "language": "English",
+              "url": "https://www.chinadaily.com.cn/",
+              "description": "English-language daily newspaper published in China",
+              "category": "news"
+            }
+          ]
+        },
+        {
+          "name": "Japan",
+          "code": "JP",
+          "flag": "🇯🇵",
+          "outlets": [
+            {
+              "name": "Japan Times",
+              "language": "English",
+              "url": "https://www.japantimes.co.jp/",
+              "description": "Japan's leading English-language newspaper",
+              "category": "news"
+            },
+            {
+              "name": "NHK World",
+              "language": "English",
+              "url": "https://www3.nhk.or.jp/nhkworld/",
+              "description": "Japan's international broadcasting service",
+              "category": "news"
+            },
+            {
+              "name": "Nikkei Asia",
+              "language": "English",
+              "url": "https://asia.nikkei.com/",
+              "description": "Asian business and financial news from Nikkei",
+              "category": "business"
+            }
+          ]
+        },
+        {
+          "name": "South Korea",
+          "code": "KR",
+          "flag": "🇰🇷",
+          "outlets": [
+            {
+              "name": "Korea Herald",
+              "language": "English",
+              "url": "http://www.koreaherald.com/",
+              "description": "South Korea's largest English-language daily",
+              "category": "news"
+            },
+            {
+              "name": "Yonhap News",
+              "language": "English",
+              "url": "https://en.yna.co.kr/",
+              "description": "South Korea's national news agency",
+              "category": "news"
+            }
+          ]
+        },
+        {
+          "name": "Singapore",
+          "code": "SG",
+          "flag": "🇸🇬",
+          "outlets": [
+            {
+              "name": "Straits Times",
+              "language": "English",
+              "url": "https://www.straitstimes.com/",
+              "description": "Singapore's leading English newspaper covering Asia-Pacific",
+              "category": "news"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Europe",
+      "countries": [
+        {
+          "name": "United Kingdom",
+          "code": "GB",
+          "flag": "🇬🇧",
+          "outlets": [
+            {
+              "name": "BBC News",
+              "language": "English",
+              "url": "https://www.bbc.com/news",
+              "description": "British public service broadcaster with global news coverage",
+              "category": "news"
+            },
+            {
+              "name": "The Guardian",
+              "language": "English",
+              "url": "https://www.theguardian.com/",
+              "description": "British daily newspaper with liberal perspective and global reach",
+              "category": "news"
+            },
+            {
+              "name": "Reuters UK",
+              "language": "English",
+              "url": "https://uk.reuters.com/",
+              "description": "International news organization headquartered in London",
+              "category": "news"
+            },
+            {
+              "name": "Financial Times",
+              "language": "English",
+              "url": "https://www.ft.com/",
+              "description": "British business and economic news with global focus",
+              "category": "business"
+            }
+          ]
+        },
+        {
+          "name": "Germany",
+          "code": "DE",
+          "flag": "🇩🇪",
+          "outlets": [
+            {
+              "name": "DW News",
+              "language": "English",
+              "url": "https://www.dw.com/en/",
+              "description": "Deutsche Welle - Germany's international broadcaster",
+              "category": "news"
+            },
+            {
+              "name": "Der Spiegel International",
+              "language": "English",
+              "url": "https://www.spiegel.de/international/",
+              "description": "English edition of Germany's leading news magazine",
+              "category": "news"
+            }
+          ]
+        },
+        {
+          "name": "France",
+          "code": "FR",
+          "flag": "🇫🇷",
+          "outlets": [
+            {
+              "name": "France 24",
+              "language": "English",
+              "url": "https://www.france24.com/en/",
+              "description": "French international news network with 24/7 coverage",
+              "category": "news"
+            },
+            {
+              "name": "The Local France",
+              "language": "English",
+              "url": "https://www.thelocal.fr/",
+              "description": "French news and practical information in English",
+              "category": "news"
+            }
+          ]
+        },
+        {
+          "name": "Spain",
+          "code": "ES",
+          "flag": "🇪🇸",
+          "outlets": [
+            {
+              "name": "El País English",
+              "language": "English",
+              "url": "https://english.elpais.com/",
+              "description": "English edition of Spain's leading newspaper",
+              "category": "news"
+            }
+          ]
+        },
+        {
+          "name": "Italy",
+          "code": "IT",
+          "flag": "🇮🇹",
+          "outlets": [
+            {
+              "name": "ANSA English",
+              "language": "English",
+              "url": "https://www.ansa.it/english/",
+              "description": "Italy's leading news agency in English",
+              "category": "news"
+            }
+          ]
+        },
+        {
+          "name": "Netherlands",
+          "code": "NL",
+          "flag": "🇳🇱",
+          "outlets": [
+            {
+              "name": "DutchNews.nl",
+              "language": "English",
+              "url": "https://www.dutchnews.nl/",
+              "description": "Daily news from the Netherlands in English",
+              "category": "news"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Americas",
+      "countries": [
+        {
+          "name": "Canada",
+          "code": "CA",
+          "flag": "🇨🇦",
+          "outlets": [
+            {
+              "name": "CBC News",
+              "language": "English",
+              "url": "https://www.cbc.ca/news",
+              "description": "Canadian Broadcasting Corporation - national public broadcaster",
+              "category": "news"
+            },
+            {
+              "name": "The Globe and Mail",
+              "language": "English",
+              "url": "https://www.theglobeandmail.com/",
+              "description": "Canada's national newspaper covering news and business",
+              "category": "news"
+            }
+          ]
+        },
+        {
+          "name": "Mexico",
+          "code": "MX",
+          "flag": "🇲🇽",
+          "outlets": [
+            {
+              "name": "Mexico News Daily",
+              "language": "English",
+              "url": "https://mexiconewsdaily.com/",
+              "description": "Mexican news in English for expats and travelers",
+              "category": "news"
+            }
+          ]
+        },
+        {
+          "name": "Brazil",
+          "code": "BR",
+          "flag": "🇧🇷",
+          "outlets": [
+            {
+              "name": "Brazil Reports",
+              "language": "English",
+              "url": "https://brazilian.report/",
+              "description": "Brazilian news and business in English",
+              "category": "news"
+            }
+          ]
+        },
+        {
+          "name": "Argentina",
+          "code": "AR",
+          "flag": "🇦🇷",
+          "outlets": [
+            {
+              "name": "Buenos Aires Times",
+              "language": "English",
+              "url": "https://www.batimes.com.ar/",
+              "description": "Argentina's news in English",
+              "category": "news"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Middle East",
+      "countries": [
+        {
+          "name": "Qatar",
+          "code": "QA",
+          "flag": "🇶🇦",
+          "outlets": [
+            {
+              "name": "Al Jazeera",
+              "language": "English",
+              "url": "https://www.aljazeera.com/",
+              "description": "Qatar-based international news network covering Middle East and beyond",
+              "category": "news"
+            }
+          ]
+        },
+        {
+          "name": "Israel",
+          "code": "IL",
+          "flag": "🇮🇱",
+          "outlets": [
+            {
+              "name": "The Times of Israel",
+              "language": "English",
+              "url": "https://www.timesofisrael.com/",
+              "description": "Israeli news covering politics, diplomacy, and security",
+              "category": "news"
+            },
+            {
+              "name": "Haaretz",
+              "language": "English",
+              "url": "https://www.haaretz.com/",
+              "description": "Israeli newspaper with liberal perspective",
+              "category": "news"
+            }
+          ]
+        },
+        {
+          "name": "United Arab Emirates",
+          "code": "AE",
+          "flag": "🇦🇪",
+          "outlets": [
+            {
+              "name": "The National",
+              "language": "English",
+              "url": "https://www.thenationalnews.com/",
+              "description": "UAE-based English-language newspaper covering Middle East",
+              "category": "news"
+            }
+          ]
+        },
+        {
+          "name": "Turkey",
+          "code": "TR",
+          "flag": "🇹🇷",
+          "outlets": [
+            {
+              "name": "Daily Sabah",
+              "language": "English",
+              "url": "https://www.dailysabah.com/",
+              "description": "Turkish news in English",
+              "category": "news"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Africa",
+      "countries": [
+        {
+          "name": "South Africa",
+          "code": "ZA",
+          "flag": "🇿🇦",
+          "outlets": [
+            {
+              "name": "News24",
+              "language": "English",
+              "url": "https://www.news24.com/",
+              "description": "South Africa's premier news source covering African news",
+              "category": "news"
+            },
+            {
+              "name": "Daily Maverick",
+              "language": "English",
+              "url": "https://www.dailymaverick.co.za/",
+              "description": "South African investigative journalism and news",
+              "category": "news"
+            }
+          ]
+        },
+        {
+          "name": "Nigeria",
+          "code": "NG",
+          "flag": "🇳🇬",
+          "outlets": [
+            {
+              "name": "Premium Times",
+              "language": "English",
+              "url": "https://www.premiumtimesng.com/",
+              "description": "Nigerian investigative journalism and news",
+              "category": "news"
+            }
+          ]
+        },
+        {
+          "name": "Kenya",
+          "code": "KE",
+          "flag": "🇰🇪",
+          "outlets": [
+            {
+              "name": "The Star Kenya",
+              "language": "English",
+              "url": "https://www.the-star.co.ke/",
+              "description": "Kenyan news covering East Africa",
+              "category": "news"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Oceania",
+      "countries": [
+        {
+          "name": "Australia",
+          "code": "AU",
+          "flag": "🇦🇺",
+          "outlets": [
+            {
+              "name": "ABC News Australia",
+              "language": "English",
+              "url": "https://www.abc.net.au/news",
+              "description": "Australian Broadcasting Corporation - national news service",
+              "category": "news"
+            },
+            {
+              "name": "The Sydney Morning Herald",
+              "language": "English",
+              "url": "https://www.smh.com.au/",
+              "description": "Australia's leading newspaper covering national and international news",
+              "category": "news"
+            },
+            {
+              "name": "The Guardian Australia",
+              "language": "English",
+              "url": "https://www.theguardian.com/au",
+              "description": "Australian edition of The Guardian",
+              "category": "news"
+            }
+          ]
+        },
+        {
+          "name": "New Zealand",
+          "code": "NZ",
+          "flag": "🇳🇿",
+          "outlets": [
+            {
+              "name": "NZ Herald",
+              "language": "English",
+              "url": "https://www.nzherald.co.nz/",
+              "description": "New Zealand's leading newspaper",
+              "category": "news"
+            },
+            {
+              "name": "Stuff",
+              "language": "English",
+              "url": "https://www.stuff.co.nz/",
+              "description": "New Zealand news and information",
+              "category": "news"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

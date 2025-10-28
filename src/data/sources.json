@@ -1,0 +1,125 @@
+{
+  "sources": [
+    {
+      "id": "nytimes-us",
+      "name": "NY Times - US",
+      "url": "https://rss.nytimes.com/services/xml/rss/nyt/US.xml",
+      "category": "us-news",
+      "active": true,
+      "sourceName": "The New York Times"
+    },
+    {
+      "id": "cnn-us",
+      "name": "CNN - US",
+      "url": "https://rss.cnn.com/rss/cnn_us.rss",
+      "category": "us-news",
+      "active": true,
+      "sourceName": "CNN"
+    },
+    {
+      "id": "npr-news",
+      "name": "NPR News",
+      "url": "https://feeds.npr.org/1001/rss.xml",
+      "category": "us-news",
+      "active": true,
+      "sourceName": "NPR"
+    },
+    {
+      "id": "nytimes-world",
+      "name": "NY Times - World",
+      "url": "https://rss.nytimes.com/services/xml/rss/nyt/World.xml",
+      "category": "world-news",
+      "active": true,
+      "sourceName": "The New York Times"
+    },
+    {
+      "id": "bbc-world",
+      "name": "BBC World",
+      "url": "https://feeds.bbci.co.uk/news/world/rss.xml",
+      "category": "world-news",
+      "active": true,
+      "sourceName": "BBC News"
+    },
+    {
+      "id": "guardian-world",
+      "name": "The Guardian - World",
+      "url": "https://www.theguardian.com/world/rss",
+      "category": "world-news",
+      "active": true,
+      "sourceName": "The Guardian"
+    },
+    {
+      "id": "techcrunch",
+      "name": "TechCrunch",
+      "url": "https://techcrunch.com/feed/",
+      "category": "technology",
+      "active": true,
+      "sourceName": "TechCrunch"
+    },
+    {
+      "id": "arstechnica",
+      "name": "Ars Technica",
+      "url": "https://feeds.arstechnica.com/arstechnica/index",
+      "category": "technology",
+      "active": true,
+      "sourceName": "Ars Technica"
+    },
+    {
+      "id": "verge",
+      "name": "The Verge",
+      "url": "https://www.theverge.com/rss/index.xml",
+      "category": "technology",
+      "active": true,
+      "sourceName": "The Verge"
+    },
+    {
+      "id": "wsj",
+      "name": "Wall Street Journal",
+      "url": "https://feeds.a.dj.com/rss/RSSWorldNews.xml",
+      "category": "business",
+      "active": true,
+      "sourceName": "The Wall Street Journal"
+    },
+    {
+      "id": "espn",
+      "name": "ESPN",
+      "url": "https://www.espn.com/espn/rss/news",
+      "category": "sports",
+      "active": true,
+      "sourceName": "ESPN"
+    },
+    {
+      "id": "cbs-sports",
+      "name": "CBS Sports",
+      "url": "https://www.cbssports.com/rss/headlines",
+      "category": "sports",
+      "active": true,
+      "sourceName": "CBS Sports"
+    },
+    {
+      "id": "variety",
+      "name": "Variety",
+      "url": "https://variety.com/feed/",
+      "category": "entertainment",
+      "active": true,
+      "sourceName": "Variety"
+    },
+    {
+      "id": "nytimes-health",
+      "name": "NY Times - Health",
+      "url": "https://rss.nytimes.com/services/xml/rss/nyt/Health.xml",
+      "category": "health",
+      "active": true,
+      "sourceName": "The New York Times"
+    },
+    {
+      "id": "science-daily",
+      "name": "Science Daily",
+      "url": "https://www.sciencedaily.com/rss/all.xml",
+      "category": "science",
+      "active": true,
+      "sourceName": "Science Daily"
+    }
+  ],
+  "lastModified": "2025-10-13T00:00:00.000Z"
+}

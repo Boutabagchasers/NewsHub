@@ -1,0 +1,42 @@
+{
+  "name": "newshub-v1",
+  "version": "1.0.3",
+  "description": "Modern news aggregation platform built with Next.js, TypeScript, and Tailwind CSS",
+  "author": "Joel Sihota",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "lint:fix": "eslint --fix",
+    "type-check": "tsc --noEmit",
+    "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,css,md}\"",
+    "clean": "rm -rf .next node_modules",
+    "reinstall": "npm run clean && npm install",
+    "analyze": "ANALYZE=true npm run build"
+  },
+  "dependencies": {
+    "@types/dompurify": "^3.0.5",
+    "date-fns": "^4.1.0",
+    "dompurify": "^3.3.0",
+    "isomorphic-dompurify": "^2.30.1",
+    "lucide-react": "^0.545.0",
+    "next": "15.5.5",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "rss-parser": "^3.13.0"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "15.5.5",
+    "prettier": "^3.6.2",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}

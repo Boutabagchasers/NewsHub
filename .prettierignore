@@ -1,0 +1,10 @@
+node_modules
+.next
+out
+build
+dist
+coverage
+.vercel
+*.log
+package-lock.json
+src/data/cached-articles.json
