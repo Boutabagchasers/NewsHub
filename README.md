@@ -2,7 +2,9 @@
 
 A beautifully designed, fully-featured news aggregation platform built with Next.js 15, TypeScript, and Tailwind CSS. NewsHub aggregates news from multiple trusted sources using RSS feeds and presents them in an intuitive, broadcast-style interface.
 
-![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
+**Repository**: https://github.com/jssihota/NewsHub
+
+![Version](https://img.shields.io/badge/version-1.0.3-blue.svg)
 ![Next.js](https://img.shields.io/badge/Next.js-15.5.5-black.svg)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue.svg)
 ![License](https://img.shields.io/badge/license-Private-red.svg)
@@ -98,7 +100,7 @@ Get NewsHub running in under 5 minutes:
 
 ```bash
 # 1. Navigate to the project directory
-cd "C:\Users\Matt Willer\Family Projects\Joel\NewsHub Platform\newshub-v1"
+cd /path/to/newshub-v1
 
 # 2. Install dependencies
 npm install
@@ -123,7 +125,7 @@ That's it! NewsHub should now be running on your local machine.
 
 2. **Navigate to the project directory**
    ```cmd
-   cd "C:\Users\Matt Willer\Family Projects\Joel\NewsHub Platform\newshub-v1"
+   cd C:\path\to\newshub-v1
    ```
 
 3. **Install dependencies**
@@ -556,7 +558,7 @@ git commit -m "Description of changes"
 
 This project is **private** and not licensed for public use. All rights reserved.
 
-Copyright (c) 2025 Joel Willer
+Copyright (c) 2025 Joel Sihota
 
 ---
 

@@ -31,7 +31,9 @@ This is the MASTER DOCUMENTATION file for AI pair programming with Claude Code. 
 
 ### What Is NewsHub?
 
-NewsHub V1 is a modern news aggregation platform that pulls articles from RSS feeds and presents them in a beautiful, broadcast-style interface. Built for Joel Willer as a personal project with plans for database integration and News API connections.
+NewsHub V1 is a modern news aggregation platform that pulls articles from RSS feeds and presents them in a beautiful, broadcast-style interface. Built for Joel Sihota as a personal project with plans for database integration and News API connections.
+
+**Repository**: https://github.com/jssihota/NewsHub
 
 ### Tech Stack
 
@@ -45,8 +47,8 @@ NewsHub V1 is a modern news aggregation platform that pulls articles from RSS fe
 
 ### Project Status
 
-- **Version**: 1.0.3 (UI/UX Enhancement Update)
-- **Last Major Update**: October 28, 2025 (Image Config Fix + Homepage Redesign)
+- **Version**: 1.0.4 (Foundation & Infrastructure Setup)
+- **Last Major Update**: October 28, 2025 (Git Init + Prettier + Environment Setup)
 - **Security Status**: 0 vulnerabilities, XSS protected, 100% HTTPS
 - **Performance**: 95%+ RSS success rate, 50% faster fetching
 - **Image Support**: 40+ news source CDN domains configured
@@ -1074,6 +1076,49 @@ REDIS_URL=your_redis_url
 
 ## CHANGELOG
 
+### Version 1.0.4 (October 28, 2025) - Foundation & Infrastructure Setup
+- **Git Repository Initialization**:
+  - Initialized git repository with proper .gitignore
+  - Configured GitHub remote at https://github.com/jssihota/NewsHub
+  - Created comprehensive initial commit documenting v1.0.3 features
+  - Successfully pushed 76 files to GitHub
+- **Code Formatting Setup**:
+  - Installed Prettier 3.6.2 as devDependency
+  - Created .prettierrc with optimized settings for Claude Code session continuity
+  - Created .prettierignore excluding build artifacts and cache files
+  - Added npm format script for consistent code formatting
+- **Project Metadata Updates**:
+  - Updated package.json version from 1.0.0 to 1.0.3
+  - Corrected author name from "Joel Willer" to "Joel Sihota"
+  - Added git user configuration for commits
+- **Environment Configuration**:
+  - Created .env.example template with placeholders
+  - Documented all optional API keys and feature flags
+  - Added setup instructions for environment variables
+- **Documentation Updates**:
+  - Updated CLAUDE.md with repository URL and author correction
+  - Documented foundation setup process
+  - Prepared for systematic development workflow
+- **User Decisions Documented**:
+  - Autonomous work permissions granted for bug fixes, refactoring, features (with planning)
+  - Target audience: Personal initially, then public/commercial
+  - Budget: Free tiers only initially ($0)
+  - Testing: Start with critical paths, 60% coverage goal
+  - Geographic focus: US and California weighted, but broad international coverage
+  - UX feedback: Future redesign needed to make top stories more prominent per category
+- **Files Modified**:
+  - `package.json` - Version and author updates
+  - `.gitignore` - Complete exclusion list
+  - `.prettierrc` - Code formatting configuration
+  - `.prettierignore` - Formatting exclusions
+  - `.env.example` - Environment variable template
+  - `CLAUDE.md` - Author and repository URL updates
+- **Infrastructure Status**:
+  - Git workflow established and operational
+  - Code formatting standards defined
+  - Development environment fully configured
+  - Ready for feature development and testing setup
+
 ### Version 1.0.3 (October 28, 2025) - UI/UX Enhancement Update
 - **Image Configuration**:
   - Fixed Next.js image loading errors for category pages
@@ -1192,8 +1237,8 @@ REDIS_URL=your_redis_url
 
 ---
 
-**Last Updated**: October 28, 2025 (Evening Session)
+**Last Updated**: October 28, 2025 (Late Session - Foundation Setup)
 **Updated By**: Claude Code (Sonnet 4.5)
-**Version**: 1.0.3 (UI/UX Enhancement Update)
-**Changes**: Image configuration fix + Homepage redesign (no infinite scroll)
-**Next Update**: After any significant change to architecture or features
+**Version**: 1.0.4 (Foundation & Infrastructure Setup)
+**Changes**: Git initialization, Prettier setup, author correction, environment template, GitHub integration
+**Next Update**: After testing infrastructure setup or adding new features
