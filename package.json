@@ -17,6 +17,8 @@
     "analyze": "ANALYZE=true npm run build"
   },
   "dependencies": {
+    "@supabase/ssr": "^0.7.0",
+    "@supabase/supabase-js": "^2.84.0",
     "@types/dompurify": "^3.0.5",
     "date-fns": "^4.1.0",
     "dompurify": "^3.3.0",
@@ -29,6 +31,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@next/bundle-analyzer": "^16.0.3",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",

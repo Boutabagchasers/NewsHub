@@ -115,17 +115,30 @@ export default async function CategoryPage(props: CategoryPageProps) {
   // Show empty state if no articles
   if (articles.length === 0) {
     return (
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen" style={{ background: 'var(--background-primary)' }}>
         {/* Development Error Info */}
         {isDevelopment && errors && errors.length > 0 && (
           <div className="max-w-4xl mx-auto px-4 pt-8">
-            <div className="bg-red-50 border-2 border-red-300 rounded-lg p-4 mb-4">
-              <h3 className="font-bold text-red-900 mb-2">⚠️ Development Error</h3>
-              <ul className="list-disc list-inside text-sm text-red-700">
-                {errors.map((error, i) => (
-                  <li key={i}>{error}</li>
-                ))}
-              </ul>
+            <div
+              className="rounded-lg p-6 mb-4"
+              style={{
+                background: 'var(--background-elevated)',
+                border: '2px solid var(--color-error)'
+              }}
+            >
+              <div className="flex items-start gap-3">
+                <span className="text-2xl">⚠️</span>
+                <div className="flex-1">
+                  <h3 className="font-bold mb-2" style={{ color: 'var(--color-error)' }}>
+                    Development Error
+                  </h3>
+                  <ul className="list-disc list-inside text-sm space-y-1" style={{ color: 'var(--color-error)' }}>
+                    {errors.map((error, i) => (
+                      <li key={i}>{error}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
         )}
@@ -144,9 +157,15 @@ export default async function CategoryPage(props: CategoryPageProps) {
     <Suspense fallback={<LoadingState />}>
       {/* Development Mode Banner */}
       {usedFallback && isDevelopment && (
-        <div className="bg-golden-sun border-b-4 border-sun-orange py-3">
+        <div
+          className="border-b-4 py-3"
+          style={{
+            background: 'var(--color-warning-bg, #FEF3C7)',
+            borderColor: 'var(--color-warning, #F59E0B)'
+          }}
+        >
           <div className="max-w-7xl mx-auto px-4 text-center">
-            <p className="text-sm font-bold text-navy">
+            <p className="text-sm font-bold" style={{ color: 'var(--foreground)' }}>
               🔧 DEVELOPMENT MODE - Using Mock Data (Real RSS feeds will load in production)
             </p>
           </div>

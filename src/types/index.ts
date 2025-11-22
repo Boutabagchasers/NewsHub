@@ -56,6 +56,10 @@ export interface Article {
   imageUrl?: string;
   imageCaption?: string;
   relatedArticles?: RelatedArticle[];
+
+  // Quality and engagement metrics (optional, for future enhancement)
+  qualityScore?: number;      // 0-1 score based on content quality signals
+  popularityScore?: number;    // 0-1 score based on engagement metrics (views, clicks, etc.)
 }
 
 export interface RelatedArticle {

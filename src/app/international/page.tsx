@@ -3,6 +3,7 @@
 import React, { useState, useMemo } from 'react';
 import { Search, ChevronDown, ChevronUp, Filter, Globe } from 'lucide-react';
 import InternationalSourceCard from '@/components/InternationalSourceCard';
+import { Card, CardContent } from '@/components/ui/card';
 import {
   searchInternationalSources,
   getAvailableLanguages,
@@ -108,39 +109,64 @@ export default function InternationalPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen" style={{ background: 'var(--background-subtle)' }}>
       {/* Header Section */}
-      <div className="bg-white border-b border-gray-200">
+      <div
+        style={{
+          background: 'var(--background-elevated)',
+          borderBottom: '1px solid var(--border-primary)'
+        }}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="flex items-center gap-3 mb-2">
-            <Globe size={32} className="text-blue-600" />
-            <h1 className="text-3xl font-bold text-gray-900">International News Outlets</h1>
+            <Globe size={32} style={{ color: 'var(--accent-primary)' }} />
+            <h1 className="text-3xl font-bold" style={{ color: 'var(--foreground)' }}>
+              International News Outlets
+            </h1>
           </div>
-          <p className="text-gray-600">
+          <p style={{ color: 'var(--text-secondary)' }}>
             Access news from around the world - {filteredOutlets.length} outlets available
           </p>
         </div>
       </div>
 
       {/* Search and Filters Section */}
-      <div className="bg-white border-b border-gray-200">
+      <div
+        style={{
+          background: 'var(--background-elevated)',
+          borderBottom: '1px solid var(--border-primary)'
+        }}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           {/* Search Bar */}
           <div className="relative mb-4">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+            <Search
+              className="absolute left-3 top-1/2 transform -translate-y-1/2"
+              size={20}
+              style={{ color: 'var(--text-tertiary)' }}
+            />
             <input
               type="text"
               placeholder="Search by outlet name, country, or description..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full pl-10 pr-4 py-3 rounded-lg focus:ring-2 transition-all"
+              style={{
+                border: '1px solid var(--border-primary)',
+                background: 'var(--background-primary)',
+                color: 'var(--foreground)'
+              }}
             />
           </div>
 
           {/* Filter Toggle Button */}
           <button
             onClick={() => setShowFilters(!showFilters)}
-            className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200 transition-colors"
+            className="flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-md transition-colors"
+            style={{
+              background: 'var(--background-subtle)',
+              color: 'var(--text-primary)'
+            }}
           >
             <Filter size={16} />
             <span>{showFilters ? 'Hide Filters' : 'Show Filters'}</span>
@@ -149,59 +175,72 @@ export default function InternationalPage() {
 
           {/* Filter Options */}
           {showFilters && (
-            <div className="mt-4 p-4 bg-gray-50 rounded-lg">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {/* Language Filter */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Language
-                  </label>
-                  <select
-                    value={selectedLanguage}
-                    onChange={(e) => setSelectedLanguage(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  >
-                    <option value="">All Languages</option>
-                    {availableLanguages.map((language) => (
-                      <option key={language} value={language}>
-                        {language}
-                      </option>
-                    ))}
-                  </select>
+            <Card variant="default" padding="lg" className="mt-4">
+              <CardContent>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {/* Language Filter */}
+                  <div>
+                    <label className="block text-sm font-medium mb-2" style={{ color: 'var(--foreground)' }}>
+                      Language
+                    </label>
+                    <select
+                      value={selectedLanguage}
+                      onChange={(e) => setSelectedLanguage(e.target.value)}
+                      className="w-full px-3 py-2 rounded-md focus:ring-2 transition-all"
+                      style={{
+                        border: '1px solid var(--border-primary)',
+                        background: 'var(--background-primary)',
+                        color: 'var(--foreground)'
+                      }}
+                    >
+                      <option value="">All Languages</option>
+                      {availableLanguages.map((language) => (
+                        <option key={language} value={language}>
+                          {language}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  {/* Category Filter */}
+                  <div>
+                    <label className="block text-sm font-medium mb-2" style={{ color: 'var(--foreground)' }}>
+                      Category
+                    </label>
+                    <select
+                      value={selectedCategory}
+                      onChange={(e) => setSelectedCategory(e.target.value)}
+                      className="w-full px-3 py-2 rounded-md focus:ring-2 transition-all"
+                      style={{
+                        border: '1px solid var(--border-primary)',
+                        background: 'var(--background-primary)',
+                        color: 'var(--foreground)'
+                      }}
+                    >
+                      <option value="">All Categories</option>
+                      {availableCategories.map((category) => (
+                        <option key={category} value={category}>
+                          {category.charAt(0).toUpperCase() + category.slice(1)}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
                 </div>
 
-                {/* Category Filter */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Category
-                  </label>
-                  <select
-                    value={selectedCategory}
-                    onChange={(e) => setSelectedCategory(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  >
-                    <option value="">All Categories</option>
-                    {availableCategories.map((category) => (
-                      <option key={category} value={category}>
-                        {category.charAt(0).toUpperCase() + category.slice(1)}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-
-              {/* Clear Filters Button */}
-              {(searchQuery || selectedLanguage || selectedCategory) && (
-                <div className="mt-4">
-                  <button
-                    onClick={clearFilters}
-                    className="px-4 py-2 text-sm font-medium text-blue-600 hover:text-blue-700"
-                  >
-                    Clear All Filters
-                  </button>
-                </div>
-              )}
-            </div>
+                {/* Clear Filters Button */}
+                {(searchQuery || selectedLanguage || selectedCategory) && (
+                  <div className="mt-4">
+                    <button
+                      onClick={clearFilters}
+                      className="px-4 py-2 text-sm font-medium"
+                      style={{ color: 'var(--accent-primary)' }}
+                    >
+                      Clear All Filters
+                    </button>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
           )}
         </div>
       </div>
@@ -210,10 +249,16 @@ export default function InternationalPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {filteredOutlets.length === 0 ? (
           <div className="text-center py-12">
-            <p className="text-gray-500 text-lg">No outlets found matching your criteria.</p>
+            <p className="text-lg mb-4" style={{ color: 'var(--text-secondary)' }}>
+              No outlets found matching your criteria.
+            </p>
             <button
               onClick={clearFilters}
-              className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+              className="px-6 py-2 rounded-md transition-colors"
+              style={{
+                background: 'var(--accent-primary)',
+                color: 'white'
+              }}
             >
               Clear Filters
             </button>
@@ -228,15 +273,26 @@ export default function InternationalPage() {
               const isExpanded = expandedRegions.has(region.name);
 
               return (
-                <div key={region.name} className="bg-white rounded-lg shadow-sm overflow-hidden">
+                <Card key={region.name} variant="elevated" padding="none" className="overflow-hidden">
                   {/* Region Header */}
                   <button
                     onClick={() => toggleRegion(region.name)}
-                    className="w-full px-6 py-4 flex items-center justify-between bg-gradient-to-r from-blue-50 to-white hover:from-blue-100 hover:to-blue-50 transition-colors"
+                    className="w-full px-6 py-4 flex items-center justify-between transition-colors"
+                    style={{
+                      background: 'linear-gradient(to right, var(--background-subtle), var(--background-elevated))'
+                    }}
                   >
                     <div className="flex items-center gap-3">
-                      <h2 className="text-xl font-semibold text-gray-900">{region.name}</h2>
-                      <span className="px-3 py-1 bg-blue-100 text-blue-700 text-sm font-medium rounded-full">
+                      <h2 className="text-xl font-semibold" style={{ color: 'var(--foreground)' }}>
+                        {region.name}
+                      </h2>
+                      <span
+                        className="px-3 py-1 text-sm font-medium rounded-full"
+                        style={{
+                          background: 'var(--accent-primary)',
+                          color: 'white'
+                        }}
+                      >
                         {regionOutlets.length} {regionOutlets.length === 1 ? 'outlet' : 'outlets'}
                       </span>
                     </div>
@@ -255,10 +311,10 @@ export default function InternationalPage() {
 
                         return (
                           <div key={country.code} className="mb-6 last:mb-0">
-                            <h3 className="text-lg font-medium text-gray-800 mb-4 flex items-center gap-2">
+                            <h3 className="text-lg font-medium mb-4 flex items-center gap-2" style={{ color: 'var(--foreground)' }}>
                               <span className="text-2xl">{country.flag}</span>
                               <span>{country.name}</span>
-                              <span className="text-sm text-gray-500 font-normal">
+                              <span className="text-sm font-normal" style={{ color: 'var(--text-tertiary)' }}>
                                 ({countryOutlets.length})
                               </span>
                             </h3>
@@ -279,7 +335,7 @@ export default function InternationalPage() {
                       })}
                     </div>
                   )}
-                </div>
+                </Card>
               );
             })}
           </div>

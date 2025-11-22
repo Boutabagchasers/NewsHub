@@ -1,7 +1,16 @@
+/**
+ * InternationalSourceCard Component - V2.0
+ * Beautiful cards for international news outlets with flags, logos, and hover previews
+ * Features: Country flags, language indicators, favorite functionality, quick stats
+ */
+
 'use client';
 
 import React, { useState } from 'react';
-import { ExternalLink, Star } from 'lucide-react';
+import Image from 'next/image';
+import { ExternalLink, Star, Globe, TrendingUp, Users } from 'lucide-react';
+import { Badge } from './ui/badge';
+import { Button, IconButton } from './ui/button';
 
 /**
  * International News Outlet Interface
@@ -12,6 +21,9 @@ interface InternationalOutlet {
   url: string;
   description: string;
   category: string;
+  favicon?: string; // Optional favicon/logo URL
+  readership?: string; // Optional readership stat (e.g., "5M+ readers")
+  established?: string; // Optional founding year
 }
 
 /**
@@ -23,17 +35,13 @@ interface InternationalSourceCardProps {
   countryFlag: string;
   isFavorite?: boolean;
   onToggleFavorite?: (outletName: string) => void;
+  variant?: 'default' | 'compact';
+  showStats?: boolean;
 }
 
 /**
  * InternationalSourceCard Component
- *
- * Displays a single international news outlet as a card with:
- * - Outlet name and country
- * - Language and category
- * - Description
- * - Visit site button
- * - Add to favorites button
+ * Displays international news outlets with country flags, logos, and quick stats
  */
 export default function InternationalSourceCard({
   outlet,
@@ -41,79 +49,280 @@ export default function InternationalSourceCard({
   countryFlag,
   isFavorite = false,
   onToggleFavorite,
+  variant = 'default',
+  showStats = true,
 }: InternationalSourceCardProps) {
   const [isHovered, setIsHovered] = useState(false);
 
-  const handleFavoriteClick = () => {
+  const handleFavoriteClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
     if (onToggleFavorite) {
       onToggleFavorite(outlet.name);
     }
   };
 
+  // Compact variant
+  if (variant === 'compact') {
+    return (
+      <div
+        className="relative p-4 rounded-lg transition-all cursor-pointer"
+        style={{
+          background: isHovered ? 'var(--background-subtle)' : 'var(--background-elevated)',
+          border: '1px solid var(--border-primary)',
+        }}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        <div className="flex items-center gap-3">
+          {/* Flag & Favicon */}
+          <div className="flex items-center gap-2 flex-shrink-0">
+            <span className="text-2xl">{countryFlag}</span>
+            {outlet.favicon && (
+              <div className="relative w-6 h-6 rounded overflow-hidden flex-shrink-0">
+                <Image
+                  src={outlet.favicon}
+                  alt={`${outlet.name} logo`}
+                  fill
+                  sizes="24px"
+                  className="object-contain"
+                  unoptimized={!outlet.favicon.startsWith('http')}
+                />
+              </div>
+            )}
+          </div>
+
+          {/* Content */}
+          <div className="flex-1 min-w-0">
+            <h4 className="font-semibold truncate" style={{ color: 'var(--foreground)' }}>
+              {outlet.name}
+            </h4>
+            <div className="flex items-center gap-2 text-xs" style={{ color: 'var(--text-tertiary)' }}>
+              <span>{country}</span>
+              <span>•</span>
+              <span>{outlet.language}</span>
+            </div>
+          </div>
+
+          {/* Actions */}
+          <div className="flex items-center gap-1 flex-shrink-0">
+            {onToggleFavorite && (
+              <IconButton
+                icon={<Star className={`w-4 h-4 ${isFavorite ? 'fill-current' : ''}`} />}
+                onClick={handleFavoriteClick}
+                variant="ghost"
+                size="sm"
+                aria-label={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
+                style={{
+                  color: isFavorite ? 'var(--color-warning)' : 'var(--text-tertiary)',
+                }}
+              />
+            )}
+            <a href={outlet.url} target="_blank" rel="noopener noreferrer">
+              <IconButton
+                icon={<ExternalLink className="w-4 h-4" />}
+                variant="ghost"
+                size="sm"
+                aria-label="Visit site"
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Default variant - Full card
   return (
-    <div
-      className="relative bg-background-elevated border border-gray-200 rounded-lg p-4 hover:shadow-lg transition-shadow duration-200"
+    <article
+      className="relative rounded-lg transition-all group"
+      style={{
+        background: 'var(--background-elevated)',
+        border: '1px solid var(--border-primary)',
+        boxShadow: isHovered ? 'var(--shadow-hover)' : 'none',
+      }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Header Section */}
-      <div className="flex items-start justify-between mb-3">
-        <div className="flex-1">
-          <div className="flex items-center gap-2 mb-1">
-            <span className="text-2xl">{countryFlag}</span>
-            <h3 className="text-lg font-semibold text-gray-900">{outlet.name}</h3>
+      {/* Card Content */}
+      <div className="p-6">
+        {/* Header Section */}
+        <div className="flex items-start justify-between mb-4">
+          <div className="flex-1 min-w-0">
+            {/* Flag & Logo */}
+            <div className="flex items-center gap-3 mb-2">
+              <span className="text-3xl flex-shrink-0">{countryFlag}</span>
+              {outlet.favicon && (
+                <div
+                  className="relative w-10 h-10 rounded-lg overflow-hidden flex-shrink-0 p-1"
+                  style={{
+                    border: '1px solid var(--border-primary)',
+                    background: 'var(--background-primary)',
+                  }}
+                >
+                  <Image
+                    src={outlet.favicon}
+                    alt={`${outlet.name} logo`}
+                    fill
+                    sizes="40px"
+                    className="object-contain p-1"
+                    unoptimized={!outlet.favicon.startsWith('http')}
+                  />
+                </div>
+              )}
+            </div>
+
+            {/* Outlet Name */}
+            <h3 className="text-xl font-bold mb-1" style={{ color: 'var(--foreground)' }}>
+              {outlet.name}
+            </h3>
+
+            {/* Country & Language */}
+            <div className="flex items-center gap-2 text-sm flex-wrap" style={{ color: 'var(--text-tertiary)' }}>
+              <div className="flex items-center gap-1.5">
+                <Globe className="w-3.5 h-3.5" />
+                <span>{country}</span>
+              </div>
+              <span>•</span>
+              <span>{outlet.language}</span>
+            </div>
           </div>
-          <div className="flex items-center gap-2 text-sm text-gray-600">
-            <span>{country}</span>
-            <span className="text-gray-400">•</span>
-            <span>{outlet.language}</span>
-          </div>
+
+          {/* Favorite Button */}
+          {onToggleFavorite && (
+            <IconButton
+              icon={<Star className={`w-5 h-5 ${isFavorite ? 'fill-current' : ''}`} />}
+              onClick={handleFavoriteClick}
+              variant="ghost"
+              aria-label={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
+              title={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
+              style={{
+                color: isFavorite ? 'var(--color-warning)' : 'var(--text-tertiary)',
+              }}
+            />
+          )}
         </div>
 
-        {/* Favorite Button */}
-        {onToggleFavorite && (
-          <button
-            onClick={handleFavoriteClick}
-            className={`p-2 rounded-full transition-colors ${
-              isFavorite
-                ? 'text-yellow-500 hover:text-yellow-600'
-                : 'text-gray-400 hover:text-gray-600'
+        {/* Category Badge */}
+        <div className="mb-4">
+          <Badge variant="secondary" size="sm">
+            {outlet.category}
+          </Badge>
+        </div>
+
+        {/* Description */}
+        <p className="text-sm leading-relaxed mb-4 line-clamp-2" style={{ color: 'var(--text-secondary)' }}>
+          {outlet.description}
+        </p>
+
+        {/* Quick Stats - Hover Preview */}
+        {showStats && (outlet.readership || outlet.established) && (
+          <div
+            className={`mb-4 p-3 rounded-lg transition-all ${
+              isHovered ? 'opacity-100' : 'opacity-60'
             }`}
-            aria-label={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
+            style={{
+              background: 'var(--background-subtle)',
+              border: '1px solid var(--border-primary)',
+            }}
           >
-            <Star
-              size={20}
-              fill={isFavorite ? 'currentColor' : 'none'}
-              strokeWidth={2}
-            />
-          </button>
+            <div className="flex items-center gap-4 text-xs">
+              {outlet.readership && (
+                <div className="flex items-center gap-1.5" style={{ color: 'var(--text-secondary)' }}>
+                  <Users className="w-3.5 h-3.5" style={{ color: 'var(--accent-primary)' }} />
+                  <span>{outlet.readership}</span>
+                </div>
+              )}
+              {outlet.established && (
+                <>
+                  {outlet.readership && <span style={{ color: 'var(--text-tertiary)' }}>•</span>}
+                  <div className="flex items-center gap-1.5" style={{ color: 'var(--text-secondary)' }}>
+                    <TrendingUp className="w-3.5 h-3.5" style={{ color: 'var(--accent-primary)' }} />
+                    <span>Est. {outlet.established}</span>
+                  </div>
+                </>
+              )}
+            </div>
+          </div>
         )}
+
+        {/* Visit Site Button */}
+        <a
+          href={outlet.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block"
+        >
+          <Button
+            variant={isHovered ? 'primary' : 'outline'}
+            size="md"
+            fullWidth
+            rightIcon={<ExternalLink className="w-4 h-4" />}
+          >
+            Visit Site
+          </Button>
+        </a>
       </div>
 
-      {/* Category Badge */}
-      <div className="mb-3">
-        <span className="inline-block px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 rounded">
-          {outlet.category}
-        </span>
-      </div>
+      {/* Hover Indicator */}
+      {isHovered && (
+        <div
+          className="absolute top-0 right-0 w-1 h-full rounded-r-lg"
+          style={{ background: 'var(--accent-primary)' }}
+        />
+      )}
+    </article>
+  );
+}
 
-      {/* Description */}
-      <p className="text-sm text-gray-700 mb-4 line-clamp-2">{outlet.description}</p>
-
-      {/* Visit Site Button */}
-      <a
-        href={outlet.url}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={`inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-md transition-all ${
-          isHovered
-            ? 'bg-blue-600 text-white'
-            : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-        }`}
+/**
+ * InternationalSourceCardSkeleton - Loading state
+ */
+export function InternationalSourceCardSkeleton({ variant = 'default' }: { variant?: 'default' | 'compact' }) {
+  if (variant === 'compact') {
+    return (
+      <div
+        className="p-4 rounded-lg animate-pulse"
+        style={{
+          background: 'var(--background-elevated)',
+          border: '1px solid var(--border-primary)',
+        }}
       >
-        <span>Visit Site</span>
-        <ExternalLink size={16} />
-      </a>
+        <div className="flex items-center gap-3">
+          <div className="skeleton w-8 h-8 rounded" />
+          <div className="flex-1 space-y-2">
+            <div className="skeleton h-4 w-32 rounded" />
+            <div className="skeleton h-3 w-20 rounded" />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div
+      className="p-6 rounded-lg animate-pulse"
+      style={{
+        background: 'var(--background-elevated)',
+        border: '1px solid var(--border-primary)',
+      }}
+    >
+      <div className="flex items-start justify-between mb-4">
+        <div className="flex-1">
+          <div className="flex items-center gap-3 mb-2">
+            <div className="skeleton w-8 h-8 rounded" />
+            <div className="skeleton w-10 h-10 rounded-lg" />
+          </div>
+          <div className="skeleton h-6 w-48 rounded mb-2" />
+          <div className="skeleton h-4 w-32 rounded" />
+        </div>
+      </div>
+      <div className="skeleton h-5 w-20 rounded-full mb-4" />
+      <div className="space-y-2 mb-4">
+        <div className="skeleton h-4 w-full rounded" />
+        <div className="skeleton h-4 w-3/4 rounded" />
+      </div>
+      <div className="skeleton h-10 w-full rounded-lg" />
     </div>
   );
 }

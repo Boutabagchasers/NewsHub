@@ -6,11 +6,24 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import dynamic from 'next/dynamic';
 import ArticleCard from '@/components/ArticleCard';
 import { Article } from '@/types';
 import { getAllCategories } from '@/lib/category-utils';
+import { diversifyArticles } from '@/lib/diversification-utils';
 import { Sparkles, Loader2, Shield, Zap, Globe, TrendingUp, CheckCircle2 } from 'lucide-react';
 import { logger } from '@/lib/logger';
+
+// Dynamic imports for below-fold sections (reduces initial bundle size)
+const AboutSection = dynamic(() => import('@/components/AboutSection'), {
+  loading: () => <div className="section-spacing text-center" style={{ color: 'var(--text-secondary)' }}>Loading...</div>,
+  ssr: false,
+});
+
+const ComingSoonSection = dynamic(() => import('@/components/ComingSoonSection'), {
+  loading: () => <div className="section-spacing text-center" style={{ color: 'var(--text-secondary)' }}>Loading...</div>,
+  ssr: false,
+});
 
 export default function Home() {
   const [articles, setArticles] = useState<Article[]>([]);
@@ -60,8 +73,13 @@ export default function Home() {
   // Filter articles by category
   useEffect(() => {
     if (selectedCategory === 'all') {
-      setFilteredArticles(articles);
+      // Apply diversification algorithm for 'all' tab
+      // Ensures balanced representation across categories and prevents source dominance
+      // Enable debug mode to see distribution stats in browser console
+      const diversified = diversifyArticles(articles, true);
+      setFilteredArticles(diversified);
     } else {
+      // For specific categories, just filter and sort by date
       const filtered = articles.filter(
         (article) => article.category?.toLowerCase() === selectedCategory.toLowerCase()
       );
@@ -85,12 +103,55 @@ export default function Home() {
   const feedArticles = displayedArticles.slice(1);
 
   return (
-    <div className="min-h-screen" style={{ paddingTop: '64px' }}>
+    <div className="min-h-screen">
+      {/* Dashboard Overview Section */}
+      <section className="py-8 border-b" style={{ background: 'var(--background)', borderColor: 'var(--border)' }}>
+        <div className="container max-w-7xl">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div className="card p-4 hover:shadow-lg transition-all animate-fade-in" style={{ animationDelay: '0.1s' }}>
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-sm font-semibold text-[var(--text-muted)] uppercase tracking-wide">Total Articles</span>
+                <TrendingUp className="w-5 h-5 text-[var(--accent-primary)]" />
+              </div>
+              <div className="text-3xl font-bold mb-1">{filteredArticles.length}</div>
+              <p className="text-xs text-[var(--text-muted)]">Across all categories</p>
+            </div>
+
+            <div className="card p-4 hover:shadow-lg transition-all animate-fade-in" style={{ animationDelay: '0.2s' }}>
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-sm font-semibold text-[var(--text-muted)] uppercase tracking-wide">Active Sources</span>
+                <Globe className="w-5 h-5 text-[var(--accent-secondary)]" />
+              </div>
+              <div className="text-3xl font-bold mb-1">{new Set(articles.map(a => a.source)).size}</div>
+              <p className="text-xs text-[var(--text-muted)]">Trusted publishers</p>
+            </div>
+
+            <div className="card p-4 hover:shadow-lg transition-all animate-fade-in" style={{ animationDelay: '0.3s' }}>
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-sm font-semibold text-[var(--text-muted)] uppercase tracking-wide">Categories</span>
+                <Sparkles className="w-5 h-5 text-[var(--accent-primary)]" />
+              </div>
+              <div className="text-3xl font-bold mb-1">8</div>
+              <p className="text-xs text-[var(--text-muted)]">Topic areas</p>
+            </div>
+
+            <div className="card p-4 hover:shadow-lg transition-all animate-fade-in" style={{ animationDelay: '0.4s' }}>
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-sm font-semibold text-[var(--text-muted)] uppercase tracking-wide">Last Updated</span>
+                <Zap className="w-5 h-5 text-[var(--accent-warning)]" />
+              </div>
+              <div className="text-3xl font-bold mb-1">Live</div>
+              <p className="text-xs text-[var(--text-muted)]">Real-time updates</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Hero Section */}
       <section className="section-spacing" style={{ background: 'var(--background-subtle)' }}>
         <div className="container">
           {/* Welcome Header */}
-          <div className="text-center mb-12">
+          <div className="text-center mb-12 animate-fade-in">
             <h1 className="heading-hero mb-4">
               Welcome to NewsHub
             </h1>
@@ -99,14 +160,55 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Hero Article */}
+          {/* Hero Article - Two Column Layout on Large Screens */}
           {!loading && heroArticle && (
-            <div className="max-w-4xl mx-auto">
-              <div className="flex items-center gap-2 mb-4">
-                <Sparkles className="w-5 h-5" style={{ color: 'var(--accent-primary)' }} />
-                <h2 className="text-xl font-bold">Featured Story</h2>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+              {/* Left Column - Featured Story (2/3 width on large screens) */}
+              <div className="lg:col-span-2">
+                <div className="flex items-center gap-2 mb-4">
+                  <Sparkles className="w-5 h-5" style={{ color: 'var(--accent-primary)' }} />
+                  <h2 className="text-xl font-bold">Featured Story</h2>
+                </div>
+                <ArticleCard article={heroArticle} variant="hero" priority />
               </div>
-              <ArticleCard article={heroArticle} variant="hero" priority />
+
+              {/* Right Column - Top Headlines Sidebar (1/3 width on large screens) */}
+              <div className="lg:col-span-1">
+                <div className="sticky top-20">
+                  <div className="flex items-center gap-2 mb-4">
+                    <TrendingUp className="w-5 h-5" style={{ color: 'var(--accent-primary)' }} />
+                    <h2 className="text-xl font-bold">Top Headlines</h2>
+                  </div>
+                  <div className="space-y-4">
+                    {feedArticles.slice(0, 5).map((article, index) => (
+                      <a
+                        key={article.id}
+                        href={article.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block card p-4 hover:shadow-lg transition-all duration-200"
+                        style={{ borderLeft: '3px solid var(--accent-primary)' }}
+                      >
+                        <div className="flex items-start gap-3">
+                          <div className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold" style={{ background: 'var(--accent-primary)', color: 'white' }}>
+                            {index + 1}
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <h3 className="font-semibold text-sm line-clamp-2 mb-1">
+                              {article.title}
+                            </h3>
+                            <div className="flex items-center gap-2 text-xs" style={{ color: 'var(--text-muted)' }}>
+                              <span className="truncate">{article.sourceName || article.source}</span>
+                              <span>•</span>
+                              <span>{new Date(article.pubDate || article.isoDate || '').toLocaleDateString()}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </div>
             </div>
           )}
 

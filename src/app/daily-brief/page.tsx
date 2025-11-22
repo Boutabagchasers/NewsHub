@@ -8,9 +8,10 @@
 import { useEffect, useState } from 'react';
 import DailyBriefSection from '@/components/DailyBriefSection';
 import LoadingState from '@/components/LoadingState';
+import { StatsCard } from '@/components/ui/card';
 import { generateDailyBrief, formatBriefDate, getBriefStatistics } from '@/lib/daily-brief-utils';
 import type { DailyBrief, Article } from '@/types';
-import { Printer, Share2, RefreshCw, Download, Calendar, Clock } from 'lucide-react';
+import { Printer, Share2, RefreshCw, Download, Calendar, Clock, Newspaper, FolderOpen } from 'lucide-react';
 import { format } from 'date-fns';
 import { logger } from '@/lib/logger';
 
@@ -127,12 +128,12 @@ export default function DailyBriefPage() {
 
   if (!brief) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center" style={{ background: 'var(--background-primary)' }}>
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-navy mb-4">
+          <h2 className="text-2xl font-bold mb-4" style={{ color: 'var(--foreground)' }}>
             Unable to Load Daily Brief
           </h2>
-          <p className="text-gray-600">
+          <p style={{ color: 'var(--text-secondary)' }}>
             Please try again later.
           </p>
         </div>
@@ -143,22 +144,28 @@ export default function DailyBriefPage() {
   const stats = getBriefStatistics(brief);
 
   return (
-    <div className="min-h-screen bg-light-gray print:bg-white">
+    <div className="min-h-screen print:bg-white" style={{ background: 'var(--background-subtle)' }}>
       {/* Header */}
-      <header className="bg-background-elevated border-b border-gray-200 shadow-sm print:shadow-none print:border-b-2 print:border-black">
+      <header
+        className="shadow-sm print:shadow-none print:border-b-2 print:border-black"
+        style={{
+          background: 'var(--background-elevated)',
+          borderBottom: '1px solid var(--border-primary)'
+        }}
+      >
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           {/* Title Section */}
           <div className="text-center mb-6">
-            <div className="flex items-center justify-center gap-2 mb-2">
-              <Calendar className="w-6 h-6 text-primary print:text-black" />
-              <h1 className="text-4xl font-bold text-navy print:text-black">
+            <div className="flex items-center justify-center gap-3 mb-2">
+              <Calendar className="w-8 h-8 print:text-black" style={{ color: 'var(--accent-primary)' }} />
+              <h1 className="text-4xl font-bold print:text-black" style={{ color: 'var(--foreground)' }}>
                 Daily Brief
               </h1>
             </div>
-            <p className="text-xl text-gray-600 print:text-black font-medium">
+            <p className="text-xl font-medium print:text-black" style={{ color: 'var(--text-secondary)' }}>
               {formatBriefDate(brief.date)}
             </p>
-            <p className="text-sm text-gray-500 print:text-gray-700 mt-1">
+            <p className="text-sm mt-1 print:text-gray-700" style={{ color: 'var(--text-tertiary)' }}>
               Your personalized news summary
             </p>
           </div>
@@ -167,7 +174,11 @@ export default function DailyBriefPage() {
           <div className="flex flex-wrap items-center justify-center gap-3 print:hidden">
             <button
               onClick={handlePrint}
-              className="flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary-dark text-white rounded-lg transition-colors shadow-sm"
+              className="flex items-center gap-2 px-4 py-2 rounded-lg transition-colors shadow-sm"
+              style={{
+                background: 'var(--accent-primary)',
+                color: 'white'
+              }}
             >
               <Printer className="w-4 h-4" />
               <span className="font-medium">Print</span>
@@ -175,7 +186,11 @@ export default function DailyBriefPage() {
 
             <button
               onClick={handleShare}
-              className="flex items-center gap-2 px-4 py-2 bg-light-gray hover:bg-gray-200 text-gray-700 rounded-lg transition-colors"
+              className="flex items-center gap-2 px-4 py-2 rounded-lg transition-colors"
+              style={{
+                background: 'var(--background-subtle)',
+                color: 'var(--text-primary)'
+              }}
             >
               <Share2 className="w-4 h-4" />
               <span className="font-medium">Share</span>
@@ -183,7 +198,11 @@ export default function DailyBriefPage() {
 
             <button
               onClick={handleRefresh}
-              className="flex items-center gap-2 px-4 py-2 bg-light-gray hover:bg-gray-200 text-gray-700 rounded-lg transition-colors"
+              className="flex items-center gap-2 px-4 py-2 rounded-lg transition-colors"
+              style={{
+                background: 'var(--background-subtle)',
+                color: 'var(--text-primary)'
+              }}
             >
               <RefreshCw className="w-4 h-4" />
               <span className="font-medium">Refresh</span>
@@ -191,39 +210,37 @@ export default function DailyBriefPage() {
 
             <button
               onClick={handleDownload}
-              className="flex items-center gap-2 px-4 py-2 bg-light-gray hover:bg-gray-200 text-gray-700 rounded-lg transition-colors"
+              className="flex items-center gap-2 px-4 py-2 rounded-lg transition-colors"
+              style={{
+                background: 'var(--background-subtle)',
+                color: 'var(--text-primary)'
+              }}
             >
               <Download className="w-4 h-4" />
               <span className="font-medium">Download</span>
             </button>
           </div>
 
-          {/* Stats Bar */}
-          <div className="mt-6 pt-4 border-t border-gray-200 print:border-gray-400">
-            <div className="flex flex-wrap items-center justify-center gap-6 text-sm">
-              <div className="flex items-center gap-2">
-                <span className="text-gray-600 print:text-gray-700">
-                  Total Articles:
-                </span>
-                <span className="font-bold text-navy print:text-black">
-                  {stats.totalArticles}
-                </span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="text-gray-600 print:text-gray-700">
-                  Categories:
-                </span>
-                <span className="font-bold text-navy print:text-black">
-                  {stats.totalSections}
-                </span>
-              </div>
-              <div className="flex items-center gap-2 print:flex">
-                <Clock className="w-4 h-4 text-gray-400" />
-                <span className="text-gray-600 print:text-gray-700">
-                  Last updated: {format(lastUpdated, 'h:mm a')}
-                </span>
-              </div>
-            </div>
+          {/* Stats Cards */}
+          <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 print:hidden">
+            <StatsCard
+              label="Total Articles"
+              value={stats.totalArticles}
+              icon={<Newspaper className="w-6 h-6" />}
+              variant="elevated"
+            />
+            <StatsCard
+              label="Categories"
+              value={stats.totalSections}
+              icon={<FolderOpen className="w-6 h-6" />}
+              variant="elevated"
+            />
+            <StatsCard
+              label="Last Updated"
+              value={format(lastUpdated, 'h:mm a')}
+              icon={<Clock className="w-6 h-6" />}
+              variant="elevated"
+            />
           </div>
         </div>
       </header>
@@ -240,11 +257,14 @@ export default function DailyBriefPage() {
         ))}
 
         {/* Footer */}
-        <footer className="mt-12 pt-8 border-t border-gray-200 print:border-gray-400 text-center">
-          <p className="text-sm text-gray-600 print:text-gray-700">
+        <footer
+          className="mt-12 pt-8 text-center print:border-gray-400"
+          style={{ borderTop: '1px solid var(--border-primary)' }}
+        >
+          <p className="text-sm print:text-gray-700" style={{ color: 'var(--text-secondary)' }}>
             NewsHub Daily Brief &bull; Generated {format(brief.generatedAt, 'MMMM d, yyyy \'at\' h:mm a')}
           </p>
-          <p className="text-xs text-gray-500 print:text-gray-600 mt-2">
+          <p className="text-xs mt-2 print:text-gray-600" style={{ color: 'var(--text-tertiary)' }}>
             Articles aggregated from trusted news sources &bull; Visit newshub.com for more
           </p>
         </footer>

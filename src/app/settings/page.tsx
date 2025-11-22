@@ -12,6 +12,8 @@ import {
 } from 'lucide-react';
 import PreferenceSection from '@/components/PreferenceSection';
 import SourceManager from '@/components/SourceManager';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
+import { Spinner } from '@/components/ui/progress';
 import { usePreferences, useSources } from '@/lib/preferences-utils';
 import { Category } from '@/types/index';
 
@@ -135,27 +137,34 @@ export default function SettingsPage() {
 
   if (prefsLoading || sourcesLoading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center" style={{ background: 'var(--background-subtle)' }}>
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading settings...</p>
+          <Spinner size="xl" variant="primary" className="mx-auto mb-4" />
+          <p style={{ color: 'var(--text-secondary)' }}>Loading settings...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen" style={{ background: 'var(--background-subtle)' }}>
       {/* Header Section */}
-      <div className="bg-background-elevated border-b border-gray-200">
+      <div
+        style={{
+          background: 'var(--background-elevated)',
+          borderBottom: '1px solid var(--border-primary)'
+        }}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
             <div>
               <div className="flex items-center gap-3 mb-2">
-                <SettingsIcon size={32} className="text-blue-600" />
-                <h1 className="text-4xl md:text-5xl font-bold text-gray-900">Settings & Preferences</h1>
+                <SettingsIcon size={32} style={{ color: 'var(--accent-primary)' }} />
+                <h1 className="text-4xl md:text-5xl font-bold" style={{ color: 'var(--foreground)' }}>
+                  Settings & Preferences
+                </h1>
               </div>
-              <p className="text-gray-600">Customize your NewsHub experience</p>
+              <p style={{ color: 'var(--text-secondary)' }}>Customize your NewsHub experience</p>
             </div>
 
             {/* Global Actions */}
@@ -164,7 +173,12 @@ export default function SettingsPage() {
                 <button
                   onClick={() => handleSave()}
                   disabled={isSaving}
-                  className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:bg-blue-400 transition-colors"
+                  className="flex items-center gap-2 px-6 py-3 rounded-md transition-colors"
+                  style={{
+                    background: isSaving ? 'var(--background-subtle)' : 'var(--accent-primary)',
+                    color: 'white',
+                    opacity: isSaving ? 0.6 : 1
+                  }}
                 >
                   <Save size={18} />
                   <span>{isSaving ? 'Saving...' : 'Save All Changes'}</span>
@@ -173,7 +187,11 @@ export default function SettingsPage() {
 
               <button
                 onClick={() => setShowResetConfirm(true)}
-                className="flex items-center gap-2 px-4 py-3 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition-colors"
+                className="flex items-center gap-2 px-4 py-3 rounded-md transition-colors"
+                style={{
+                  background: 'var(--background-subtle)',
+                  color: 'var(--text-primary)'
+                }}
               >
                 <RotateCcw size={18} />
                 <span>Reset to Defaults</span>
@@ -451,30 +469,43 @@ export default function SettingsPage() {
 
       {/* Reset Confirmation Modal */}
       {showResetConfirm && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-background-elevated rounded-lg p-6 max-w-md w-full mx-4">
-            <h3 className="text-xl font-semibold text-gray-900 mb-4">
-              Reset to Default Settings?
-            </h3>
-            <p className="text-gray-600 mb-6">
-              This will reset all your preferences to their default values. This action cannot be
-              undone.
-            </p>
-            <div className="flex gap-3 justify-end">
-              <button
-                onClick={() => setShowResetConfirm(false)}
-                className="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition-colors"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={handleReset}
-                className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors"
-              >
-                Reset Settings
-              </button>
-            </div>
-          </div>
+        <div
+          className="fixed inset-0 flex items-center justify-center z-50"
+          style={{ background: 'rgba(0, 0, 0, 0.5)' }}
+        >
+          <Card variant="elevated" padding="lg" className="max-w-md w-full mx-4">
+            <CardHeader>
+              <CardTitle>Reset to Default Settings?</CardTitle>
+              <CardDescription>
+                This will reset all your preferences to their default values. This action cannot be
+                undone.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="flex gap-3 justify-end mt-4">
+                <button
+                  onClick={() => setShowResetConfirm(false)}
+                  className="px-4 py-2 rounded-md transition-colors"
+                  style={{
+                    background: 'var(--background-subtle)',
+                    color: 'var(--text-primary)'
+                  }}
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleReset}
+                  className="px-4 py-2 rounded-md transition-colors"
+                  style={{
+                    background: 'var(--color-error)',
+                    color: 'white'
+                  }}
+                >
+                  Reset Settings
+                </button>
+              </div>
+            </CardContent>
+          </Card>
         </div>
       )}
     </div>

@@ -2,7 +2,11 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/contexts/ThemeContext";
-import Navigation from "@/components/Navigation";
+import { SidebarProvider } from "@/contexts/SidebarContext";
+import { ToastProvider } from "@/components/ui/toast";
+import Sidebar from "@/components/Sidebar";
+import MainContentWrapper from "@/components/MainContentWrapper";
+import SkipToContent from "@/components/SkipToContent";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -40,11 +44,19 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${inter.variable} font-sans antialiased`}>
+        <SkipToContent />
         <ThemeProvider>
-          <Navigation />
-          <main id="main-content">
-            {children}
-          </main>
+          <ToastProvider>
+            <SidebarProvider>
+              {/* Sidebar Navigation */}
+              <Sidebar />
+
+              {/* Main Content Area - Shifts with sidebar */}
+              <MainContentWrapper>
+                {children}
+              </MainContentWrapper>
+            </SidebarProvider>
+          </ToastProvider>
         </ThemeProvider>
       </body>
     </html>

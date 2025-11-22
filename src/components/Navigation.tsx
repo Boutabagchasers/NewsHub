@@ -1,50 +1,23 @@
 /**
  * Navigation Component
- * Auto-hide sticky header with scroll behavior
- * Hides on scroll down, appears on scroll up
+ * Sticky header that remains visible at all times
  */
 
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import { Newspaper, Search, Menu, X } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
 import { getAllCategories } from '@/lib/category-utils';
 
 export default function Navigation() {
-  const [isVisible, setIsVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const categories = getAllCategories();
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-
-      // Show nav when scrolling up, hide when scrolling down
-      // Always show if at top of page
-      if (currentScrollY < 10) {
-        setIsVisible(true);
-      } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        // Scrolling down & past 100px
-        setIsVisible(false);
-        setIsMobileMenuOpen(false); // Close mobile menu when hiding
-      } else if (currentScrollY < lastScrollY) {
-        // Scrolling up
-        setIsVisible(true);
-      }
-
-      setLastScrollY(currentScrollY);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY]);
-
   return (
     <nav
-      className={`nav-header ${isVisible ? 'visible' : 'hidden'}`}
+      className="nav-header visible"
       style={{
         height: '64px',
       }}

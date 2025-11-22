@@ -48,7 +48,7 @@ NewsHub V1 is a modern news aggregation platform that pulls articles from RSS fe
 ### Project Status
 
 - **Version**: 1.0.4 (Foundation & Infrastructure Setup)
-- **Last Major Update**: October 28, 2025 (Git Init + Prettier + Environment Setup)
+- **Last Major Update**: October 28, 2025 (Documentation Reorganization)
 - **Security Status**: 0 vulnerabilities, XSS protected, 100% HTTPS
 - **Performance**: 95%+ RSS success rate, 50% faster fetching
 - **Image Support**: 40+ news source CDN domains configured
@@ -56,6 +56,26 @@ NewsHub V1 is a modern news aggregation platform that pulls articles from RSS fe
 - **Deployment Status**: Local development only (not yet deployed)
 - **Active Development**: Yes
 - **Next Phase**: Database integration + News API connections
+
+### Project Directory Structure
+
+**IMPORTANT**: This application is located in a subdirectory!
+
+```
+NewsHub Platform/              ← Parent directory (historical docs)
+└── newshub-v1/                ← **ACTUAL APPLICATION** (work here!)
+    ├── src/                   ← All source code
+    ├── public/                ← Static assets
+    ├── README.md              ← Main documentation
+    ├── CLAUDE.md              ← This file (MASTERDOC)
+    └── [other current docs]   ← All up-to-date documentation
+```
+
+**Key Points**:
+- Always work in `newshub-v1/` directory
+- Parent directory contains historical docs from Oct 13-14, 2025 (marked with warning banners)
+- All current documentation is in `newshub-v1/`
+- Parent `README.md` explains the structure
 
 ---
 
@@ -1076,7 +1096,39 @@ REDIS_URL=your_redis_url
 
 ## CHANGELOG
 
-### Version 1.0.4 (October 28, 2025) - Foundation & Infrastructure Setup
+### Version 1.0.4 (October 28, 2025) - Foundation & Infrastructure Setup + Documentation Reorganization
+
+#### Late Session - Documentation Reorganization
+- **Parent Directory Documentation Update**:
+  - Updated root `README.md` to explain project structure clearly
+  - Documented that `newshub-v1/` is the actual application directory
+  - Created comprehensive navigation guide for new developers/AI sessions
+  - Added historical context for root-level files
+- **Historical Documentation Marking**:
+  - Added warning banners to all old root-level documentation files
+  - Marked PROJECT_SUMMARY.md, DESIGN_DOCUMENTATION.md, COMPONENT_SHOWCASE.md as historical
+  - Marked VISUAL_SUMMARY.md, SETUP_GUIDE.md, FILES_CREATED.md as outdated
+  - Each historical file now clearly points to current documentation locations
+- **CLAUDE.md Enhancements**:
+  - Added "Project Directory Structure" section
+  - Documented parent vs subdirectory relationship
+  - Updated for session continuity across directory levels
+  - Clarified working directory expectations
+- **Documentation Clarity**:
+  - Eliminated confusion about which documentation to use
+  - Clear guidance on historical vs. current files
+  - Improved onboarding experience for new sessions
+- **Files Modified**:
+  - Root `/README.md` - Complete rewrite explaining structure
+  - `PROJECT_SUMMARY.md` - Added historical disclaimer
+  - `DESIGN_DOCUMENTATION.md` - Added historical disclaimer
+  - `COMPONENT_SHOWCASE.md` - Added historical disclaimer
+  - `VISUAL_SUMMARY.md` - Added historical disclaimer
+  - `SETUP_GUIDE.md` - Added historical disclaimer
+  - `FILES_CREATED.md` - Added historical disclaimer
+  - `newshub-v1/CLAUDE.md` - Added directory structure section
+
+#### Early Session - Foundation Setup
 - **Git Repository Initialization**:
   - Initialized git repository with proper .gitignore
   - Configured GitHub remote at https://github.com/jssihota/NewsHub
@@ -1237,8 +1289,8 @@ REDIS_URL=your_redis_url
 
 ---
 
-**Last Updated**: October 28, 2025 (Late Session - Foundation Setup)
+**Last Updated**: October 28, 2025 (Late Session - Documentation Reorganization)
 **Updated By**: Claude Code (Sonnet 4.5)
-**Version**: 1.0.4 (Foundation & Infrastructure Setup)
-**Changes**: Git initialization, Prettier setup, author correction, environment template, GitHub integration
-**Next Update**: After testing infrastructure setup or adding new features
+**Version**: 1.0.4 (Foundation & Infrastructure Setup + Documentation Reorganization)
+**Changes**: Reorganized documentation structure, added historical markers to old files, updated root README, enhanced CLAUDE.md with directory structure info
+**Next Update**: After adding new features, bug fixes, or architectural changes

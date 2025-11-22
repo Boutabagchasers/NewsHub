@@ -1,5 +1,10 @@
 import type { NextConfig } from "next";
 
+// Bundle analyzer for performance monitoring
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+});
+
 const nextConfig: NextConfig = {
   /* Next.js configuration */
 
@@ -164,6 +169,11 @@ const nextConfig: NextConfig = {
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
   },
+
+  // Experimental features for better performance
+  experimental: {
+    optimizePackageImports: ['lucide-react', 'date-fns'],
+  },
 };
 
-export default nextConfig;
+export default withBundleAnalyzer(nextConfig);

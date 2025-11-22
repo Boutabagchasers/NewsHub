@@ -1,67 +1,208 @@
 /**
- * LoadingState Component
- * Skeleton loading UI for article cards with shimmer effect
+ * LoadingState Component - V2.0
+ * Content-aware skeleton loaders that match actual layouts
+ * Multiple variants for different content types
  */
 
-export default function LoadingState() {
-  return (
-    <div className="max-w-4xl mx-auto px-4 py-8 space-y-8">
-      {/* Category header skeleton */}
-      <div className="animate-pulse">
-        <div className="h-8 bg-gray-200 rounded w-48 mb-2"></div>
-        <div className="h-4 bg-gray-200 rounded w-32"></div>
+'use client';
+
+export interface LoadingStateProps {
+  variant?: 'card' | 'list' | 'hero' | 'horizontal' | 'compact';
+  count?: number;
+  className?: string;
+}
+
+export default function LoadingState({
+  variant = 'card',
+  count = 3,
+  className = '',
+}: LoadingStateProps) {
+  const skeletons = Array.from({ length: count }, (_, i) => i);
+
+  // Hero variant - Large featured article skeleton
+  if (variant === 'hero') {
+    return (
+      <div className={`article-card card-spacious ${className}`}>
+        {/* Hero image skeleton */}
+        <div className="skeleton w-full aspect-[16/9] rounded-xl mb-6" />
+
+        {/* Category badge skeleton */}
+        <div className="skeleton h-6 w-24 rounded-full mb-4" />
+
+        {/* Title skeleton - 2 lines */}
+        <div className="space-y-3 mb-4">
+          <div className="skeleton h-10 w-full rounded-md" />
+          <div className="skeleton h-10 w-4/5 rounded-md" />
+        </div>
+
+        {/* Meta info skeleton */}
+        <div className="flex items-center gap-3 mb-6">
+          <div className="skeleton h-4 w-32 rounded-md" />
+          <div className="skeleton h-4 w-4 rounded-full" />
+          <div className="skeleton h-4 w-24 rounded-md" />
+        </div>
+
+        {/* Snippet skeleton - 3 lines */}
+        <div className="space-y-2 mb-6">
+          <div className="skeleton h-5 w-full rounded-md" />
+          <div className="skeleton h-5 w-full rounded-md" />
+          <div className="skeleton h-5 w-3/4 rounded-md" />
+        </div>
+
+        {/* Buttons skeleton */}
+        <div className="flex items-center gap-3">
+          <div className="skeleton h-10 w-40 rounded-md" />
+          <div className="skeleton h-10 w-10 rounded-md" />
+          <div className="skeleton h-10 w-10 rounded-md" />
+        </div>
       </div>
+    );
+  }
 
-      <div className="border-t border-gray-200 my-6"></div>
+  // Horizontal variant - Side-by-side skeleton
+  if (variant === 'horizontal') {
+    return (
+      <div className="space-y-4">
+        {skeletons.map((index) => (
+          <div key={index} className={`article-card ${className}`}>
+            <div className="flex gap-4 sm:gap-6">
+              {/* Image skeleton */}
+              <div className="flex-shrink-0">
+                <div className="skeleton w-32 h-32 sm:w-48 sm:h-32 rounded-lg" />
+              </div>
 
-      {/* Article card skeletons */}
-      {[1, 2, 3].map((index) => (
-        <div key={index} className="mb-12 animate-pulse">
-          {/* Image skeleton */}
-          <div className="bg-gray-200 rounded-lg h-64 mb-4"></div>
+              {/* Content skeleton */}
+              <div className="flex-1 min-w-0 space-y-3">
+                {/* Category */}
+                <div className="skeleton h-5 w-20 rounded-full" />
 
-          {/* Caption skeleton */}
-          <div className="mb-4 space-y-2">
-            <div className="h-3 bg-gray-200 rounded w-3/4"></div>
-            <div className="h-3 bg-gray-200 rounded w-1/2"></div>
+                {/* Title - 2 lines */}
+                <div className="space-y-2">
+                  <div className="skeleton h-6 w-full rounded-md" />
+                  <div className="skeleton h-6 w-3/4 rounded-md" />
+                </div>
+
+                {/* Snippet - hidden on mobile */}
+                <div className="hidden sm:block space-y-2">
+                  <div className="skeleton h-4 w-full rounded-md" />
+                  <div className="skeleton h-4 w-2/3 rounded-md" />
+                </div>
+
+                {/* Meta and actions */}
+                <div className="flex items-center justify-between">
+                  <div className="skeleton h-4 w-32 rounded-md" />
+                  <div className="flex gap-2">
+                    <div className="skeleton h-8 w-8 rounded-md" />
+                    <div className="skeleton h-8 w-8 rounded-md" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  // Compact variant - Minimal list skeleton
+  if (variant === 'compact') {
+    return (
+      <div className="space-y-4">
+        {skeletons.map((index) => (
+          <div
+            key={index}
+            className={`pb-4 border-b border-[var(--border-primary)] ${className}`}
+          >
+            <div className="flex gap-3">
+              {/* Small image */}
+              <div className="flex-shrink-0">
+                <div className="skeleton w-20 h-20 rounded-md" />
+              </div>
+
+              {/* Content */}
+              <div className="flex-1 min-w-0 space-y-2">
+                {/* Title - 2 lines */}
+                <div className="skeleton h-5 w-full rounded-md" />
+                <div className="skeleton h-5 w-4/5 rounded-md" />
+
+                {/* Meta */}
+                <div className="flex items-center justify-between">
+                  <div className="skeleton h-3 w-32 rounded-md" />
+                  <div className="skeleton h-6 w-6 rounded-md" />
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  // List variant - Simple list skeleton
+  if (variant === 'list') {
+    return (
+      <div className="space-y-3">
+        {skeletons.map((index) => (
+          <div
+            key={index}
+            className={`p-4 rounded-lg border border-[var(--border-primary)] ${className}`}
+          >
+            <div className="flex items-center justify-between">
+              {/* Title */}
+              <div className="flex-1 space-y-2">
+                <div className="skeleton h-5 w-3/4 rounded-md" />
+                <div className="skeleton h-4 w-1/2 rounded-md" />
+              </div>
+
+              {/* Icon */}
+              <div className="skeleton h-8 w-8 rounded-md ml-4" />
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  // Default card variant - Standard article card skeleton
+  return (
+    <div className={`grid gap-6 ${className}`}>
+      {skeletons.map((index) => (
+        <div key={index} className="article-card">
+          {/* Image skeleton - 16:9 */}
+          <div className="skeleton w-full aspect-[16/9] rounded-lg mb-4" />
+
+          {/* Category badge skeleton */}
+          <div className="skeleton h-5 w-20 rounded-full mb-3" />
+
+          {/* Title skeleton - 3 lines */}
+          <div className="space-y-2 mb-3">
+            <div className="skeleton h-6 w-full rounded-md" />
+            <div className="skeleton h-6 w-full rounded-md" />
+            <div className="skeleton h-6 w-3/4 rounded-md" />
           </div>
 
-          {/* Headline skeleton */}
-          <div className="mb-3 space-y-2">
-            <div className="h-6 bg-gray-200 rounded w-full"></div>
-            <div className="h-6 bg-gray-200 rounded w-5/6"></div>
+          {/* Meta info skeleton */}
+          <div className="flex items-center gap-3 mb-4">
+            <div className="skeleton h-4 w-32 rounded-md" />
+            <div className="skeleton h-4 w-4 rounded-full" />
+            <div className="skeleton h-4 w-24 rounded-md" />
           </div>
 
-          {/* Source and timestamp skeleton */}
-          <div className="flex items-center gap-2 mb-4">
-            <div className="h-4 bg-gray-200 rounded w-24"></div>
-            <div className="h-4 bg-gray-200 rounded w-20"></div>
-          </div>
-
-          {/* Content snippet skeleton */}
+          {/* Snippet skeleton - 3 lines */}
           <div className="space-y-2 mb-4">
-            <div className="h-4 bg-gray-200 rounded w-full"></div>
-            <div className="h-4 bg-gray-200 rounded w-full"></div>
-            <div className="h-4 bg-gray-200 rounded w-11/12"></div>
-            <div className="h-4 bg-gray-200 rounded w-full"></div>
-            <div className="h-4 bg-gray-200 rounded w-4/5"></div>
+            <div className="skeleton h-4 w-full rounded-md" />
+            <div className="skeleton h-4 w-full rounded-md" />
+            <div className="skeleton h-4 w-2/3 rounded-md" />
           </div>
 
-          {/* Read full article link skeleton */}
-          <div className="h-4 bg-gray-200 rounded w-40 mb-6"></div>
-
-          {/* Related articles skeleton */}
-          <div className="bg-gray-50 rounded-lg p-4 space-y-3">
-            <div className="h-5 bg-gray-200 rounded w-32 mb-3"></div>
-            <div className="h-4 bg-gray-200 rounded w-full"></div>
-            <div className="h-4 bg-gray-200 rounded w-full"></div>
-            <div className="h-4 bg-gray-200 rounded w-5/6"></div>
+          {/* Actions skeleton */}
+          <div className="flex items-center justify-between">
+            <div className="skeleton h-4 w-32 rounded-md" />
+            <div className="flex gap-2">
+              <div className="skeleton h-8 w-8 rounded-md" />
+              <div className="skeleton h-8 w-8 rounded-md" />
+            </div>
           </div>
-
-          {/* Separator */}
-          {index < 3 && (
-            <div className="border-t border-gray-200 my-8"></div>
-          )}
         </div>
       ))}
     </div>
@@ -69,29 +210,61 @@ export default function LoadingState() {
 }
 
 /**
- * Compact loading state for list view
+ * Page Loading Skeleton
+ * Full-page loading state with header and content
  */
-export function LoadingStateCompact() {
+export function PageLoadingSkeleton() {
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8 space-y-4">
-      <div className="animate-pulse">
-        <div className="h-8 bg-gray-200 rounded w-48 mb-6"></div>
+    <div className="container mx-auto py-8 animate-pulse">
+      {/* Page header */}
+      <div className="mb-8">
+        <div className="skeleton h-12 w-64 rounded-md mb-4" />
+        <div className="skeleton h-5 w-96 rounded-md" />
       </div>
 
-      {[1, 2, 3, 4, 5].map((index) => (
-        <div
-          key={index}
-          className="border border-gray-200 rounded-lg p-4 flex gap-4 animate-pulse"
-        >
-          <div className="bg-gray-200 rounded h-24 w-32 flex-shrink-0"></div>
-          <div className="flex-1 space-y-2">
-            <div className="h-5 bg-gray-200 rounded w-3/4"></div>
-            <div className="h-4 bg-gray-200 rounded w-1/4"></div>
-            <div className="h-3 bg-gray-200 rounded w-full"></div>
-            <div className="h-3 bg-gray-200 rounded w-5/6"></div>
-          </div>
-        </div>
-      ))}
+      {/* Content grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <LoadingState variant="card" count={6} />
+      </div>
     </div>
   );
+}
+
+/**
+ * Profile Loading Skeleton
+ * For user profile pages
+ */
+export function ProfileLoadingSkeleton() {
+  return (
+    <div className="space-y-6 animate-pulse">
+      {/* Avatar and name */}
+      <div className="flex items-center gap-4">
+        <div className="skeleton w-24 h-24 rounded-full" />
+        <div className="space-y-2">
+          <div className="skeleton h-8 w-48 rounded-md" />
+          <div className="skeleton h-4 w-32 rounded-md" />
+        </div>
+      </div>
+
+      {/* Stats */}
+      <div className="grid grid-cols-3 gap-4">
+        {[1, 2, 3].map((i) => (
+          <div key={i} className="skeleton h-24 rounded-lg" />
+        ))}
+      </div>
+
+      {/* Content sections */}
+      <div className="space-y-4">
+        <div className="skeleton h-6 w-40 rounded-md" />
+        <div className="skeleton h-32 w-full rounded-lg" />
+      </div>
+    </div>
+  );
+}
+
+/**
+ * Legacy LoadingStateCompact - For backward compatibility
+ */
+export function LoadingStateCompact() {
+  return <LoadingState variant="compact" count={5} />;
 }
